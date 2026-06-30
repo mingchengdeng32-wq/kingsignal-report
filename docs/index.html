@@ -66,26 +66,37 @@ li{margin-bottom:8px;}
 .lede{font-size:18px; color:#41392f;}
 a.src{color:var(--accent2); text-decoration:underline; text-decoration-color:#c7bfa9;}
 .callout{
-  background:#fff; border:1px solid var(--line); border-left:4px solid var(--accent);
+  background:#fff; border:1px solid var(--line); border-left:4px solid var(--gold);
   padding:20px 22px; border-radius:2px; margin:24px 0;
 }
 .callout.gold{border-left-color:var(--gold);}
 .callout.green{border-left-color:var(--accent2);}
 .callout h4{margin-top:0;}
 .gap{
-  background:var(--gap-bg); border:1px dashed #d8a99a; border-radius:4px;
-  padding:14px 18px; margin:16px 0; font-family:"Helvetica Neue",Arial,sans-serif; font-size:13.5px;
+  position:relative;
+  background:repeating-linear-gradient(45deg, var(--gap-bg), var(--gap-bg) 10px, #f5e0d6 10px, #f5e0d6 20px);
+  border:1px solid #d8a99a; border-left:6px solid var(--gap-bad); border-radius:4px;
+  padding:14px 18px 14px 42px; margin:18px 0; font-family:"Helvetica Neue",Arial,sans-serif; font-size:13.5px;
   color:#7a3326;
 }
+.gap::before{
+  content:"⚠"; position:absolute; left:14px; top:14px; font-size:15px; color:var(--gap-bad);
+}
 .gap b{color:var(--gap-bad);}
+.table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:18px 0 28px;}
 table{
-  width:100%; border-collapse:collapse; margin:18px 0 28px;
+  width:100%; border-collapse:collapse; margin:0;
   font-family:"Helvetica Neue",Arial,sans-serif; font-size:13.5px;
 }
-th,td{border:1px solid var(--line); padding:10px 12px; text-align:left; vertical-align:top;}
+th,td{border:1px solid var(--line); padding:10px 12px; text-align:left; vertical-align:top; min-width:110px;}
 th{background:var(--paper2); font-weight:600;}
 tr:nth-child(even) td{background:#fdfcf9;}
 .timeline{margin:30px 0;}
+.tl-tag{
+  display:inline-block; font-family:"Helvetica Neue",Arial,sans-serif; font-size:10.5px;
+  letter-spacing:.05em; background:var(--paper2); color:var(--accent2); border:1px solid var(--line);
+  padding:2px 8px; border-radius:9px; margin-bottom:8px;
+}
 .tl-item{
   display:grid; grid-template-columns:90px 1fr; gap:18px; padding:18px 0;
   border-bottom:1px solid var(--line);
@@ -110,7 +121,7 @@ tr:nth-child(even) td{background:#fdfcf9;}
   flex:1; min-width:150px; background:#fff; border:1px solid var(--line);
   padding:16px 18px; text-align:center; border-radius:3px;
 }
-.kpi .num{font-size:24px; font-weight:700; color:var(--accent); font-family:"Helvetica Neue",Arial,sans-serif;}
+.kpi .num{font-size:38px; font-weight:700; color:var(--accent); font-family:"Helvetica Neue",Arial,sans-serif; line-height:1.1; letter-spacing:-.02em;}
 .kpi .lbl{font-size:12px; color:var(--muted); font-family:"Helvetica Neue",Arial,sans-serif; margin-top:4px;}
 .quote{
   font-style:italic; font-size:17px; color:#3a2e22; border-left:3px solid var(--gold);
@@ -123,9 +134,9 @@ tr:nth-child(even) td{background:#fdfcf9;}
   letter-spacing:.08em; text-transform:uppercase; padding:3px 9px; border-radius:10px;
   margin-right:8px; font-weight:700;
 }
-.p-short{background:#fbeeea; color:var(--accent);}
-.p-mid{background:#f3ecda; color:var(--gold);}
-.p-long{background:#e7eee9; color:var(--accent2);}
+.p-short{background:#fbe4e0; color:#c0392b;}
+.p-mid{background:#fbeed1; color:#b9790e;}
+.p-long{background:#e2eee6; color:#2f7a4f;}
 footer{
   border-top:1px solid var(--line); margin-top:80px; padding:40px 0;
   font-family:"Helvetica Neue",Arial,sans-serif; font-size:12.5px; color:var(--muted);
@@ -133,6 +144,10 @@ footer{
 @media(max-width:720px){
   .cards,.tl-grid{grid-template-columns:1fr;}
   header.hero h1{font-size:30px;}
+}
+@media(max-width:480px){
+  .tl-item{grid-template-columns:1fr; gap:6px;}
+  .tl-year{padding-top:0;}
 }
 </style>
 </head>
@@ -146,7 +161,7 @@ footer{
     <div class="meta">
       <span>日期：2026-06-30</span>
       <span>对标对象：深圳金信诺高新技术股份有限公司（300252.SZ） vs Amphenol Corporation（NYSE: APH）</span>
-      <span>研究方法：4路并行深度研究 + 99次以上真实网络检索，全程标注来源与数据缺口</span>
+      <span>研究方法：6路并行深度研究 + 260次以上真实网络检索，全程标注来源与数据缺口</span>
     </div>
   </div>
 </header>
@@ -190,7 +205,7 @@ footer{
   <p>这是本次研究最关键的部分——不看"买了什么"，而是逐笔拆解"为什么买"和"买完之后发生了什么"，试图找出安费诺并购决策背后可复制的逻辑。</p>
 
   <h3>财务轨迹：营收从35亿到230亿美元</h3>
-  <table>
+  <div class="table-wrap"><table>
     <tr><th>年份</th><th>营收</th><th>同比</th><th>备注</th></tr>
     <tr><td>2010</td><td>$3.55B</td><td>+26.0%</td><td>金融危机后复苏</td></tr>
     <tr><td>2015</td><td>$5.57B</td><td>+4.2%</td><td></td></tr>
@@ -198,13 +213,13 @@ footer{
     <tr><td>2020</td><td>$8.60B</td><td>+4.5%</td><td>疫情冲击但仍正增长</td></tr>
     <tr><td>2024</td><td>$15.22B</td><td>+21.3%</td><td>CIT并购于5月完成交割</td></tr>
     <tr><td>2025</td><td>$23.09B</td><td>+51.7%</td><td>康普DAS/OWN+Andrew+CCS相关贡献</td></tr>
-  </table>
+  </table></div>
   <p style="font-size:13px;color:var(--muted)">来源：<a class="src" href="https://stockanalysis.com/stocks/aph/revenue/">stockanalysis.com revenue series</a>；净利润 FY2024 约 $2.424B（+25.7%），市值截至2026年2月约 $182.88B，自1998年以来CAGR约23.53%，来源：MacroTrends 检索摘要（原始页面抓取被拦截，数据经间接验证）。</p>
 
-  <div class="gap"><b>数据缺口：</b> 未能找到安费诺多年期"内生增长 vs 并购贡献"的官方拆分数据。仅2025年H1/Q1 2026季度披露：H1 2025营收+52%中，内生增长37%，并购贡献约15个百分点。不能把这个比例外推到2000-2025年全周期。</div>
+  <div class="gap"><b>数据缺口：</b> 未能找到安费诺多年期"内生增长 vs 并购贡献"的官方拆分数据。仅2025年H1/Q1 2026季度披露：H1 2025营收+52%中，内生增长37%，并购贡献约15个百分点。不能把这个比例外推到2000-2025年全周期。另外，FCI案例中"绩效文化拉高利润率"的因果关系，本报告只拿到了EPS超指引这一个结果指标，未能获取FCI独立的营业利润率轨迹数据，因此该因果链是合理推断而非直接验证。</div>
 
   <h3>并购节奏：小额"补丁式"并购 + 偶发巨额转型交易</h3>
-  <p>Tracxn（34笔）、Mergr（33笔，累计追踪交易额约$37.4B，平均单笔约$1.13B）等第三方统计都承认覆盖不完整——其他资料显示安费诺自1990年代以来完成"数百笔"补强型收购。观察到的模式是<b>双峰分布</b>：多数年份是若干笔小额"tuck-in"并购（如2022年4笔合计仅$140M），偶发年份出现转型级巨额交易（FCI $1.275B，2016；CIT约$2.0B，2024；康普CCS $10.5B，2025）。</p>
+  <p>Tracxn（34笔）、Mergr（33笔，累计追踪交易额约$37.4B，平均单笔约$1.13B）等第三方统计都承认覆盖不完整——其他资料显示安费诺自1990年代以来完成"数百笔"补强型收购。<span style="color:var(--muted)">基于这些不完整数据集观察到的疑似模式（非统计验证）</span>是<b>双峰分布</b>：多数年份是若干笔小额"tuck-in"并购（如2022年4笔合计仅$140M），偶发年份出现转型级巨额交易（FCI $1.275B，2016；CIT约$2.0B，2024；康普CCS $10.5B，2025）。</p>
 
   <h3>六个关键并购的"前因后果"拆解</h3>
   <div class="timeline">
@@ -212,6 +227,7 @@ footer{
     <div class="tl-item">
       <div class="tl-year">2009</div>
       <div class="tl-body">
+        <span class="tl-tag">规则5：逆周期/卖方机会窗口</span>
         <h4>Times Microwave Systems —— 危机中逆势买入</h4>
         <div class="tl-grid">
           <div class="tl-box before"><b>Before / 为什么买</b>Times Microwave是低损耗发泡介质/PTFE同轴电缆技术的发明者，安费诺当时只做连接器，缺乏电缆/介质的专有技术——填补"连接器+电缆"端到端能力缺口。</div>
@@ -223,10 +239,11 @@ footer{
     <div class="tl-item">
       <div class="tl-year">2016</div>
       <div class="tl-body">
+        <span class="tl-tag">规则3：利润率稀释→绩效文化拉高（样板案例）</span>
         <h4>FCI Asia（$1.275B）—— "先拉低利润率，再用文化拉高"的样板案例</h4>
         <div class="tl-grid">
           <div class="tl-box before"><b>Before / 为什么买</b>Bain Capital旗下FCI在高速、I/O、电源及小型化互连产品上能力突出，正好补齐安费诺在电信/数据通信/无线市场的高速产品线短板。</div>
-          <div class="tl-box after"><b>After / 效果</b>FCI初始利润率低于安费诺均值，但绩效文化快速生效：<b>FCI在2016年贡献EPS $0.19，远超最初指引的约$0.12</b>；与此同时公司全年调整后营业利润率仍达到创纪录的19.8%。这是后续CIT、CCS反复复制的模板。</div>
+          <div class="tl-box after"><b>After / 效果</b>FCI初始利润率低于安费诺均值；<b>FCI在2016年贡献EPS $0.19，远超最初指引的约$0.12</b>，与此同时公司全年调整后营业利润率达到创纪录的19.8%。<span style="color:var(--muted)">（注：EPS超指引可能受营收规模、汇率等多重因素驱动，报告未能拿到FCI独立的利润率轨迹数据，"绩效文化拉高"是结合管理层一贯表述做出的合理推断，非直接验证的因果关系——详见本节末数据缺口。）</span></div>
         </div>
       </div>
     </div>
@@ -234,6 +251,7 @@ footer{
     <div class="tl-item">
       <div class="tl-year">2024</div>
       <div class="tl-body">
+        <span class="tl-tag">规则3+4：利润率稀释→拉高 / 保留管理层</span>
         <h4>Carlisle Interconnect Technologies / CIT（约$2.0B）</h4>
         <div class="tl-grid">
           <div class="tl-box before"><b>Before / 为什么买</b>卖方Carlisle正"转型为纯建材公司"而剥离非核心资产；CIT在商用航空、国防、工业等恶劣环境互连领域能力突出，与安费诺现有传感器/互连产品线高度互补。CIT预期2024年销售额约$900M，调整后EBITDA利润率约20%（低于安费诺均值），首年即预期增厚EPS。</div>
@@ -245,6 +263,7 @@ footer{
     <div class="tl-item">
       <div class="tl-year">2025</div>
       <div class="tl-body">
+        <span class="tl-tag">规则2：关系先孵化，再促成更大交易</span>
         <h4>康普 Outdoor Wireless Networks + DAS（$2.1B）—— 关系"孵化器"</h4>
         <div class="tl-grid">
           <div class="tl-box before"><b>Before / 为什么买</b>康普因债务压力被迫剥离非核心资产；该交易同时让安费诺获得"CommScope"品牌使用权。</div>
@@ -256,10 +275,11 @@ footer{
     <div class="tl-item">
       <div class="tl-year">2025-2026</div>
       <div class="tl-body">
+        <span class="tl-tag">规则3+5：稀释→拉高 / 卖方困境驱动</span>
         <h4>康普 Connectivity and Cable Solutions / CCS（$10.5B，安费诺史上最大并购）</h4>
         <div class="tl-grid">
           <div class="tl-box before"><b>Before / 为什么买</b>CCS 2025年销售额约$3.6B，EBITDA利润率约26%，业务结构约40%数据中心/35%宽带/25%工业互连；康普借此交易去杠杆并更名为"Vistance Networks"。Norwitt原话："The fundamental thing that excites us is their strength in fiber optics"——明确填补安费诺在光纤互连（AI数据中心刚需）上的短板，因为这块市场增速快于公司原有的铜缆互连基本盘。</div>
-          <div class="tl-box after"><b>After / 效果</b>预计2026全年贡献约$4.1B销售额；公告当日股价小幅上涨0.83%，Barclays因AI数据中心敞口将评级从Equalweight上调至Overweight；Q1 2026指引中CCS相关贡献达$900M销售额、约$0.02 EPS增厚。CEO在Q4财报会上明确表态："integration and synergy... not a word in the Amphenol lexicon"——刻意不做传统PMI整合方案，而是让CCS"evolve into the Amphenol family"。</div>
+          <div class="tl-box after"><b>After / 效果</b>预计2026全年贡献约$4.1B销售额；公告当日股价小幅上涨0.83%，Barclays因AI数据中心敞口将评级从Equalweight上调至Overweight；Q1 2026指引中CCS相关贡献达$900M销售额、约$0.02 EPS增厚。</div>
         </div>
       </div>
     </div>
@@ -267,8 +287,8 @@ footer{
   </div>
 
   <div class="quote">
-    "M&amp;A is a very long-term process of developing and incubating relationships, keeping in touch, developing a sense of mutual trust and awareness with companies that we would be interested one day in inviting into the Amphenol family."
-    <cite>—— CEO R. Adam Norwitt（财报电话会，经检索综合）</cite>
+    "Integration and synergy... not a word in the Amphenol lexicon." 谈到CCS交易整合方式时，CEO Norwitt刻意拒绝传统PMI（并购后整合）方法论，转而强调让新公司"evolve into the Amphenol family"——这是本报告中最能浓缩安费诺并购哲学的一句话，但请注意：这是针对2025年单笔交易的表态，本报告将其作为安费诺一贯文化的代表性例证，而非贯穿其75年历史的逐字宣言（详见第三节"文化"小节的Charles Industries早期案例佐证）。
+    <cite>—— CEO R. Adam Norwitt，Q4 2025财报电话会</cite>
   </div>
 
   <h3>综合提炼：并购飞轮的六条运作逻辑</h3>
@@ -301,7 +321,7 @@ footer{
     </div>
     <div class="card">
       <h4>文化：刻意拒绝"整合"作为一个项目</h4>
-      <p>这是本次研究中最值得记住的一句话——Norwitt谈CCS整合时说"integration and synergy... 不是安费诺词汇表里的词"，取而代之的说法是让新公司"evolve into the Amphenol family"。这与传统PMI（并购后整合）方法论形成鲜明对比，后者通常围绕"100天协同捕获计划"展开。</p>
+      <p>这不是2025年才有的新说法——早在Charles Industries并购案中，创始人留任的关键承诺就是"不整合制造、销售、工程或管理职能"；2025年CCS交易中Norwitt的表态（见上方引文）是同一套文化在最新、最大一笔交易上的延续，而非临时起意的公关话术。这与传统PMI（并购后整合）方法论形成鲜明对比，后者通常围绕"100天协同捕获计划"展开。</p>
     </div>
   </div>
 
@@ -316,13 +336,13 @@ footer{
   <h2>放权与监控：如何管理独立运营的子公司（含AI应用）</h2>
 
   <h3>四种"去中心化"模式横向对比</h3>
-  <table>
+  <div class="table-wrap"><table>
     <tr><th>公司</th><th>放权程度</th><th>核心管控手段</th></tr>
     <tr><td><b>安费诺</b></td><td>145名GM，各自对损益全权负责</td><td>奖金与"销售/利润同比增长 + 实际vs预算"挂钩，封顶2倍目标奖金；总部职能极度精简</td></tr>
     <tr><td><b>丹纳赫 (DBS)</b></td><td>业务单元独立运营</td><td>每日销售电话核查、每周区域复盘、每月KPI复盘；红黄绿可视化管理，连续2个月"红色"必须启动问题解决流程(PSP)；总部30余人专职治理团队</td></tr>
     <tr><td><b>伊利诺伊工具集团 (80/20)</b></td><td>80+业务单元完全损益自主</td><td>统一的标准化记分卡：营收、营业利润率、管理费用率、库存月数、DSO、逾期应收、ROIC——指标少而硬，跨单元可比</td></tr>
     <tr><td><b>伯克希尔哈撒韦</b></td><td>子公司管理者运营完全自主</td><td>管控几乎只集中在<b>资本配置</b>一项；总部仅约12人对应约4.5万名员工；用人极度审慎替代流程管控</td></tr>
-  </table>
+  </table></div>
   <p style="font-size:13px;color:var(--muted)">共同规律：没有一家用"集中决策"替代单元自主权，而是各自挑选1-2个简单、难以造假、持续应用的硬指标 + 固定复盘节奏，并刻意把总部人头数压到很小，使其没有能力/动力去微观管理。</p>
 
   <h3>失败案例警示：荷兰皇家阿霍德 / US Foodservice（2003）</h3>
@@ -348,7 +368,11 @@ footer{
     </div>
     <div class="card">
       <h4>资本与风控闸门</h4>
-      <p>设定资本开支/新增编制审批门槛，超过即需CFO/CEO签字——即便最"放手"的伯克希尔模式，也只在资本配置这一项上保留100%集中控制权。并购前做<b>内控审计</b>而不只是财务尽调，发现问题要求90天整改计划并签字确认后才转入常态化报告节奏。GM奖金指标应"双指标解耦"（如增长+独立可验证的现金/营运资金指标），避免阿霍德式的单指标操纵风险。</p>
+      <p>设定资本开支/新增编制审批门槛，超过即需CFO/CEO签字——即便最"放手"的伯克希尔模式，也只在资本配置这一项上保留100%集中控制权。</p>
+    </div>
+    <div class="card">
+      <h4>防操纵闸门（直接回应阿霍德案的教训）</h4>
+      <p>并购前做<b>内控审计</b>而不只是财务尽调，发现问题要求90天整改计划并签字确认后才转入常态化报告节奏——这是阿霍德案的核心教训：欺诈发生不是因为去中心化本身，而是因为收购时已知的内控缺陷从未被整改。同时GM奖金指标必须"双指标解耦"（如增长+独立可验证的现金/营运资金指标），避免薪酬恰好奖励了最容易被操纵的那个指标。</p>
     </div>
     <div class="card">
       <h4>可负担的AI工具选型</h4>
@@ -373,7 +397,7 @@ footer{
     <li>光互连市场预计从2026年约$21.88B增长到2031年约$40.03B；800G/1.6T光模块加速放量；共封装光学（CPO）市场预计从2025年约$95M增长到2034年超$1.05B，年复合增速约30.6%。</li>
     <li>但行业共识并非"铜被淘汰"，而是<b>场景分工</b>：机柜内/短距离（scale-up）互连铜缆仍因低延迟、低功耗、低成本继续占优；机柜间/长距离（scale-out）互连加速转向光纤。换句话说，<b>铜缆/铜连接器仍是AI数据中心刚需，只是应用场景从"全场景"收缩到"短距高密度"</b>——这恰恰是金信诺现有高速线缆/连接器能力可以延伸的方向。</li>
     <li>电源侧出现新的材料与连接需求：英伟达800V HVDC架构正把交流配电改为高压直流，通过高电流母排（busbar）直送机柜，机柜内铜用量可降低最多45%——但对<b>母排的截面、接触电阻、紧固可靠性、温升路径</b>提出了更高的精密制造和材料要求；AI芯片单颗功耗达300-700W，要求多电压轨、超低阻抗设计。</li>
-    <li>液冷正从"可选项"变成"CPO架构的强制要求"，带动液冷兼容连接器（cold plate、manifold、CDU相关接口）成为一个独立的快速增长品类——这恰好印证了此前并购标的研究中发现的 Steel & O'Brien（美国，已被PE收购）案例：传统不锈钢卫生级管件厂商近5年硬转型液冷连接器，正是这个赛道的真实信号。</li>
+    <li>液冷正从"可选项"变成"CPO架构的强制要求"，带动液冷兼容连接器（cold plate、manifold、CDU相关接口）成为一个独立的快速增长品类——第六节标的清单中的 Steel & O'Brien 案例（传统不锈钢卫生级管件厂商近5年硬转型液冷连接器）正是这个赛道真实存在的信号。</li>
   </ul>
 
   <div class="callout green">
@@ -396,22 +420,30 @@ footer{
   <h2>欧美日韩潜在并购标的清单</h2>
   <p>以下基于公开网络检索的初步筛选，<b>非PitchBook/Capital IQ等专业并购数据库的系统性扫描结果</b>，请视为研究起点而非尽调结论。</p>
 
-  <table>
+  <div class="table-wrap"><table>
     <tr><th>公司</th><th>地区</th><th>状态</th><th>规模</th><th>核心相关性</th><th>可获得性信号</th></tr>
     <tr><td><b>RF Industries (NASDAQ: RFIL)</b></td><td>美国</td><td>公开上市，体量相称</td><td>市值约$231M / TTM营收约$82M</td><td>RF连接器、电缆组件、光纤/电源混合电缆——与金信诺核心业务高度重合</td><td>最具体可执行标的，浮动盘小，本身也是连续并购方（刚完成对Microlab的收购）</td></tr>
     <tr><td>ept GmbH</td><td>德国</td><td>独立、稳定经营</td><td>约1200名员工（规模可能超出$300M EV上限）</td><td>高速板对板连接器（Zero8/Colibri/One27系列），3-16+ Gbit/s，与AI服务器需求高度契合</td><td>无出售信号，列为对标/愿景型目标</td></tr>
     <tr><td>Fourslide Spring & Stamping</td><td>美国</td><td>家族经营、多代传承</td><td>历史规模约$6M+起家，现规模未披露</td><td>铍青铜/磷青铜冲压触点，正对应金信诺"精密金属"材料兴趣</td><td>未确认信号，需直接接触验证</td></tr>
     <tr><td>Daehan Optical/Taihan Fiberoptics (KOSDAQ: 010170)</td><td>韩国</td><td>公开上市</td><td>市值约$2.7-2.9B（远超承受范围）</td><td>韩国唯一垂直整合光纤预制棒到电缆制造商，已为AI数据中心供货并收购美国InCap做"buy America"产能</td><td>过大，列为战略研究/潜在合作对象而非收购标的</td></tr>
+    <tr><td><b>KEL Corporation (TSE Standard: 6919)</b></td><td>日本</td><td>公开上市，体量相称</td><td>市值约¥106.8亿（约$70M）；营收约¥128.5亿（约$84M，+8.3%）</td><td>细线/微同轴连接器（SSL 0.5mm/USLS 0.4mm/XSLS 0.25mm系列），日本贸易媒体明确点名为AI服务器内部高速信号传输受益品类</td><td><b>本轮新发现最具体可执行标的之一</b>：无控股股东/家族大股东（最大股东仅7.04%），已有外资机构持股（HSBC新加坡3.84%），FY2026经营利润同比骤降52.3%（原材料成本+中国工厂延误），财务承压或提升谈判意愿</td></tr>
+    <tr><td><b>Gigalane Co. (KOSDAQ: 049080)</b></td><td>韩国</td><td>公开上市</td><td>规模未披露（检索缺口），2025年营收同比-3.3%，经营亏损扩大69.7%</td><td>韩国最大本土RF连接业务商，RF连接器/电缆/天线可达67GHz高频，另有O-RAN射频单元新业务</td><td>持续亏损、近期1:10缩股，财务困境可能预示股权变动讨论，但未发现明确"待售"信号</td></tr>
+    <tr><td>Harada Shindo（原田伸銅所）</td><td>日本</td><td>独立专业厂商</td><td>未披露（官网不公开财务数据）</td><td>磷青铜专业制造商，产品直接服务连接器、引线框架、端子、继电器/开关触点——与金信诺"精密合金"兴趣高度吻合</td><td>未确认信号，需通过帝国数据库/东京商工调查或日本并购中介直接接触核实</td></tr>
     <tr><td>Trexon（原Audax PE平台）</td><td>美国</td><td><b>已被安费诺收购</b>（2025，约$1B）</td><td>1100名员工</td><td>国防/航天定制互连与电缆组件roll-up平台</td><td>不可获得，但是重要竞争情报：证明安费诺本身就是这个赛道最活跃、资金最充裕的买家</td></tr>
     <tr><td>Steel & O'Brien Manufacturing</td><td>美国</td><td><b>已被PE收购</b>（Flow Control Holdings, 2020）</td><td>未披露</td><td>从卫生级不锈钢管件转型为数据中心液冷连接器供应商</td><td>不可直接获得，但验证了液冷连接器是真实增长品类，值得关注其母平台未来的二次退出</td></tr>
-  </table>
+  </table></div>
+
+  <div class="callout green">
+    <h4>日本市场补充发现：domestic consolidation已在发生，外资尚未进场</h4>
+    <p>2025年7月Hirose Electric（日本主要连接器厂商）100%收购S.E.R. Corporation（半导体测试插座/探针精密触点专家）；2025年10月京瓷以¥807亿（约$540M）收购NEC持有的日本航空电子（JAE）33%股权，形成战略联盟而非全面并购。两笔交易均为<b>日本本土厂商之间的整合</b>，全球主流并购数据库（connectorsupplier.com 2024-2025年度盘点）显示<b>安费诺、Molex、HEICO等全球买家尚未在日韩连接器市场出手</b>——这对金信诺是双刃剑：竞争对手少（先发优势），但也说明可能还没有现成的"被验证过的退出路径"可以参照。</p>
+  </div>
 
   <div class="gap">
     <b>明确的数据缺口（按地区）：</b>
     <ul style="margin-top:8px;">
       <li><b>德国/Mittelstand：</b>确认了宏观层面的传承危机（约23.1万家中小企业面临2025年底前的传承问题，21.5万计划交接案例中不足1/3已确认继任者），但未能检索到具体在售的连接器类标的——需要付费的德国并购中介数据库或本地顾问。</li>
-      <li><b>日本：</b>本报告最薄弱的地区。日本中小企业事业承继型并购在宏观层面高度活跃，但具体标的信息被锁在日语并购平台（Batonz、日本M&A中心）内，无法通过通用搜索获取，需要日语渠道或本地财务顾问介入。</li>
-      <li><b>韩国：</b>仅找到一家规模过大的标的（Daehan/Taihan），猜测性搜索的几个可能候选公司名称（Joinset、ACE Technologies、Comotec等）均未找到可验证的连接器相关证据——这些名字不应被采信为真实候选。</li>
+      <li><b>日本（已补充更新）：</b>第二轮用日语关键词直接检索后，已找到一个体量相称的可执行上市标的（KEL Corporation, TSE: 6919）和一个未确认但方向对口的精密合金线索（Harada Shindo）。Batonz平台上208条"电子部品"类在售listing中，多数公司名称在NDA前保持匿名，需要平台注册或付费访问才能看到真实标的名称——这是仍然存在但比第一轮窄得多的缺口。</li>
+      <li><b>韩国（已补充更新）：</b>新找到 Gigalane（KOSDAQ: 049080, 67GHz高频RF连接器，财务承压）作为方向对口的候选，但仍未发现明确"待售"信号。韩国缺少类似日本Batonz那样可被搜索引擎索引的开放式中小企业并购平台，相关交易信息分散在韩国M&A交易所(KMX)等封闭中介渠道，需本地顾问或DART官方信息系统直接查询。第一轮报告中提到的Joinset、ACE Technologies、Comotec等公司名称仍未找到可验证证据，不应被采信。</li>
       <li><b>美国特种合金/导热材料公司：</b>识别出若干能力匹配的公司（Pacific Metal Stampings、Wiegel、Ditron、NH Stamping、CTE Inc.）但均无公开的股权可获得性信息。</li>
     </ul>
     全程未使用PitchBook、Capital IQ、Mergermarket等专业并购数据库——系统性的标的筛选应以此类工具按SIC/NAICS代码、EV区间、股权结构（PE持有/家族企业50年+）做结构化扫描，这是本报告之后的必要下一步，而非现在就能拍板的结论。
@@ -425,7 +457,7 @@ footer{
   <h4><span class="priority p-short">短期 6-12月</span>止血与聚焦</h4>
   <ul>
     <li>优先解决扣非净利润持续为负的问题——安费诺所有并购飞轮的前提是"持续产生现金流"，这是金信诺当前最大的结构性差距，不解决就谈不上复制并购打法。</li>
-    <li>对历史非核心并购资产（PCB、北斗导航、磷酸铁锂等）做系统性复盘，该退出的果断退出。</li>
+    <li>对历史非核心并购资产（PCB、北斗导航、磷酸铁锂等）做系统性复盘——本报告未掌握这些资产当前的收入/利润趋势数据，因此这里只能给方向、给不出取舍结论；建议下一步先补齐这些资产的财务表现数据，再按"是否对接AI/高速互连主线"为标准做退出决策，而不是不加分析地"该退出的果断退出"。</li>
     <li>把高速线缆/连接器产品线的市场叙事，明确聚焦到"AI服务器机柜内高密度铜互连"这一仍在增长的细分场景。</li>
   </ul>
 
@@ -433,7 +465,7 @@ footer{
   <ul>
     <li>在1-2个高增长事业部试点"独立核算+总经理部分授权"，配套本报告第四节提出的最小化治理框架（统一记分卡、月度复盘、资本审批门槛）。</li>
     <li>部署多主体财务合并与异常检测工具（如Sage Intacct/NetSuite OneWorld类），为未来并购整合打好财务可视化基础。</li>
-    <li>评估液冷连接器、高电流母排精密制造能力的内生研发或小规模并购/合资可行性，RF Industries可作为案例研究起点。</li>
+    <li>评估液冷连接器、高电流母排精密制造能力的内生研发或小规模并购/合资可行性（<b>前提：先核实金信诺现有专利/在研项目，确认这确实是能力空白而非已有基础待加速</b>——本报告第五节已标注此项尚未核实），RF Industries可作为案例研究起点。</li>
   </ul>
 
   <h4><span class="priority p-long">长期 3-5年</span>纪律性连续并购</h4>
@@ -454,7 +486,7 @@ footer{
     <li>安费诺具体的资本开支审批门槛、GM绩效记分卡细节、并购标的留任奖金/股权条款均未公开披露。</li>
     <li>CIT并入安费诺后的独立财务轨迹无法从合并报表中拆出。</li>
     <li>未找到任何被公开承认的安费诺并购整合失败案例——不确定是真实track record还是报道偏差。</li>
-    <li>日本、韩国的具体可执行并购标的信息严重不足，本报告在这两个地区的发现质量明显弱于欧美。</li>
+    <li>日本、韩国的具体可执行并购标的信息此前严重不足，经第二轮日语/韩语原生检索补充后已找到KEL Corporation（日本）、Gigalane（韩国）等方向对口的上市公司候选，但仍弱于欧美——韩国尤其缺少可被搜索引擎索引的中小企业并购平台，Korean DART官方信息系统的股权结构细节仍未核实。</li>
     <li>本次研究全程未接入PitchBook/Capital IQ/Mergermarket等专业并购数据库，所有标的筛选基于公开网络检索，结论应作为研究起点而非尽调依据。</li>
     <li>金信诺自身的专利布局、在研项目（尤其是液冷连接器、高电流母排相关）尚未核实，建议用会话内已加载的企业信息查询工具（yuandian）做补充验证。</li>
   </ul>
@@ -464,7 +496,7 @@ footer{
 
 <footer>
   <div class="wrap">
-    本报告由4路并行深度研究（合计99次以上真实工具调用）综合整理，所有关键数据均标注信源链接；带有⚠️标记的部分为明确数据缺口，建议在正式决策前做进一步核实。研究方法：英文公开资料检索（SEC文件、investors.amphenol.com、财报电话会transcripts、行业媒体），不涉及付费数据库或非公开信息。
+    本报告由6路并行深度研究（合计260次以上真实工具调用，含英文、日文、韩文原生检索）综合整理，所有关键数据均标注信源链接；带有⚠️标记的部分为明确数据缺口，建议在正式决策前做进一步核实。研究方法：公开资料检索（SEC文件、investors.amphenol.com、财报电话会transcripts、行业媒体、Batonz等日本中小企业并购平台、日韩交易所披露），不涉及付费数据库或非公开信息。本报告经过一轮独立审查并据此修订（内容论证严谨性与视觉设计均有迭代）。
   </div>
 </footer>
 
